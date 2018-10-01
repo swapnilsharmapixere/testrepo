@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2da3011aa46943d8a1469e9e59fe7238" Name="Diagram1">
+        <EntityTypeShape EntityType="OilDataCollectionModel.Company" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OilDataCollectionModel.FulcurmEmployee" Width="1.5" PointX="5.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OilDataCollectionModel.Location" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OilDataCollectionModel.Permission" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OilDataCollectionModel.RolePermission" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OilDataCollectionModel.sysdiagram" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OilDataCollectionModel.SystemInformation" Width="1.5" PointX="0.75" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OilDataCollectionModel.UserRole" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="OilDataCollectionModel.WebUser" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="OilDataCollectionModel.Well" Width="1.5" PointX="6" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OilDataCollectionModel.WellType" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="OilDataCollectionModel.FK__WebUser__Company__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="OilDataCollectionModel.FK__WebUser__Locatio__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="OilDataCollectionModel.FK__Well__LocationId__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="OilDataCollectionModel.FK__RolePermi__Permi__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="OilDataCollectionModel.FK__RolePermi__RoleI__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="OilDataCollectionModel.FK__RolePermi__Syste__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="OilDataCollectionModel.FK__WebUser__RoleId__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="OilDataCollectionModel.FK__Well__WellTypeId__35BCFE0A" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

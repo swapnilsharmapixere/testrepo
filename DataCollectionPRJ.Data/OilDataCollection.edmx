@@ -1,0 +1,731 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="OilDataCollectionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="CompanyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="FulcurmEmployee">
+          <Key>
+            <PropertyRef Name="FulcurmEmployeeId" />
+          </Key>
+          <Property Name="FulcurmEmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FulcurmEmployeeName" Type="nvarchar" MaxLength="200" />
+          <Property Name="FulcurmEmployeeEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="FulcurmEmployeeLastReport" Type="datetime" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LocationName" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="PermissionId" />
+          </Key>
+          <Property Name="PermissionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PermissionName" Type="nvarchar" MaxLength="300" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="RolePermission">
+          <Key>
+            <PropertyRef Name="RolePermissionId" />
+          </Key>
+          <Property Name="RolePermissionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleId" Type="int" />
+          <Property Name="PermissionId" Type="int" />
+          <Property Name="SystemInformationId" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="SystemInformation">
+          <Key>
+            <PropertyRef Name="SystemInformationId" />
+          </Key>
+          <Property Name="SystemInformationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SyatemInformationName" Type="nvarchar" MaxLength="200" />
+          <Property Name="SystemInformationValue" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserRoleId" />
+          </Key>
+          <Property Name="UserRoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="WebUser">
+          <Key>
+            <PropertyRef Name="WebUserId" />
+          </Key>
+          <Property Name="WebUserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WebUserName" Type="nvarchar" MaxLength="200" />
+          <Property Name="WebEmailId" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="RoleId" Type="int" />
+          <Property Name="LocationId" Type="int" />
+          <Property Name="LastLogin" Type="datetime" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="UserPassword" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Well">
+          <Key>
+            <PropertyRef Name="WellId" />
+          </Key>
+          <Property Name="WellName" Type="nvarchar" MaxLength="200" />
+          <Property Name="LocationId" Type="int" />
+          <Property Name="WellTypeId" Type="int" />
+          <Property Name="Flow" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="WellId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WellType">
+          <Key>
+            <PropertyRef Name="WellTypeId" />
+          </Key>
+          <Property Name="WellTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WellTypeName" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <Association Name="FK__RolePermi__Permi__4E88ABD4">
+          <End Role="Permission" Type="Self.Permission" Multiplicity="0..1" />
+          <End Role="RolePermission" Type="Self.RolePermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permission">
+              <PropertyRef Name="PermissionId" />
+            </Principal>
+            <Dependent Role="RolePermission">
+              <PropertyRef Name="PermissionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RolePermi__RoleI__4D94879B">
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="0..1" />
+          <End Role="RolePermission" Type="Self.RolePermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="UserRoleId" />
+            </Principal>
+            <Dependent Role="RolePermission">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RolePermi__Syste__4F7CD00D">
+          <End Role="SystemInformation" Type="Self.SystemInformation" Multiplicity="0..1" />
+          <End Role="RolePermission" Type="Self.RolePermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemInformation">
+              <PropertyRef Name="SystemInformationId" />
+            </Principal>
+            <Dependent Role="RolePermission">
+              <PropertyRef Name="SystemInformationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WebUser__Company__2E1BDC42">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="WebUser" Type="Self.WebUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="WebUser">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WebUser__Locatio__300424B4">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="WebUser" Type="Self.WebUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="WebUser">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WebUser__RoleId__2F10007B">
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="0..1" />
+          <End Role="WebUser" Type="Self.WebUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="UserRoleId" />
+            </Principal>
+            <Dependent Role="WebUser">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Well__LocationId__34C8D9D1">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Well" Type="Self.Well" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Well">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Well__WellTypeId__35BCFE0A">
+          <End Role="WellType" Type="Self.WellType" Multiplicity="0..1" />
+          <End Role="Well" Type="Self.Well" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WellType">
+              <PropertyRef Name="WellTypeId" />
+            </Principal>
+            <Dependent Role="Well">
+              <PropertyRef Name="WellTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SpSelect_dashboardWellmarkers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SpSelect_WellData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="OilDataCollectionModelStoreContainer">
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FulcurmEmployee" EntityType="Self.FulcurmEmployee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Permission" EntityType="Self.Permission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RolePermission" EntityType="Self.RolePermission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SystemInformation" EntityType="Self.SystemInformation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebUser" EntityType="Self.WebUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Well" EntityType="Self.Well" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WellType" EntityType="Self.WellType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__RolePermi__Permi__4E88ABD4" Association="Self.FK__RolePermi__Permi__4E88ABD4">
+            <End Role="Permission" EntitySet="Permission" />
+            <End Role="RolePermission" EntitySet="RolePermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RolePermi__RoleI__4D94879B" Association="Self.FK__RolePermi__RoleI__4D94879B">
+            <End Role="UserRole" EntitySet="UserRole" />
+            <End Role="RolePermission" EntitySet="RolePermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RolePermi__Syste__4F7CD00D" Association="Self.FK__RolePermi__Syste__4F7CD00D">
+            <End Role="SystemInformation" EntitySet="SystemInformation" />
+            <End Role="RolePermission" EntitySet="RolePermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WebUser__Company__2E1BDC42" Association="Self.FK__WebUser__Company__2E1BDC42">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="WebUser" EntitySet="WebUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WebUser__Locatio__300424B4" Association="Self.FK__WebUser__Locatio__300424B4">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="WebUser" EntitySet="WebUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WebUser__RoleId__2F10007B" Association="Self.FK__WebUser__RoleId__2F10007B">
+            <End Role="UserRole" EntitySet="UserRole" />
+            <End Role="WebUser" EntitySet="WebUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Well__LocationId__34C8D9D1" Association="Self.FK__Well__LocationId__34C8D9D1">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Well" EntitySet="Well" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Well__WellTypeId__35BCFE0A" Association="Self.FK__Well__WellTypeId__35BCFE0A">
+            <End Role="WellType" EntitySet="WellType" />
+            <End Role="Well" EntitySet="Well" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OilDataCollectionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="CompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="WebUsers" Relationship="Self.FK__WebUser__Company__2E1BDC42" FromRole="Company" ToRole="WebUser" />
+        </EntityType>
+        <EntityType Name="FulcurmEmployee">
+          <Key>
+            <PropertyRef Name="FulcurmEmployeeId" />
+          </Key>
+          <Property Name="FulcurmEmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FulcurmEmployeeName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="FulcurmEmployeeEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FulcurmEmployeeLastReport" Type="DateTime" Precision="3" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="WebUsers" Relationship="Self.FK__WebUser__Locatio__300424B4" FromRole="Location" ToRole="WebUser" />
+          <NavigationProperty Name="Wells" Relationship="Self.FK__Well__LocationId__34C8D9D1" FromRole="Location" ToRole="Well" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="PermissionId" />
+          </Key>
+          <Property Name="PermissionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PermissionName" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="RolePermissions" Relationship="Self.FK__RolePermi__Permi__4E88ABD4" FromRole="Permission" ToRole="RolePermission" />
+        </EntityType>
+        <EntityType Name="RolePermission">
+          <Key>
+            <PropertyRef Name="RolePermissionId" />
+          </Key>
+          <Property Name="RolePermissionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="Int32" />
+          <Property Name="PermissionId" Type="Int32" />
+          <Property Name="SystemInformationId" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Permission" Relationship="Self.FK__RolePermi__Permi__4E88ABD4" FromRole="RolePermission" ToRole="Permission" />
+          <NavigationProperty Name="UserRole" Relationship="Self.FK__RolePermi__RoleI__4D94879B" FromRole="RolePermission" ToRole="UserRole" />
+          <NavigationProperty Name="SystemInformation" Relationship="Self.FK__RolePermi__Syste__4F7CD00D" FromRole="RolePermission" ToRole="SystemInformation" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="SystemInformation">
+          <Key>
+            <PropertyRef Name="SystemInformationId" />
+          </Key>
+          <Property Name="SystemInformationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SyatemInformationName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SystemInformationValue" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="RolePermissions" Relationship="Self.FK__RolePermi__Syste__4F7CD00D" FromRole="SystemInformation" ToRole="RolePermission" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserRoleId" />
+          </Key>
+          <Property Name="UserRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="RolePermissions" Relationship="Self.FK__RolePermi__RoleI__4D94879B" FromRole="UserRole" ToRole="RolePermission" />
+          <NavigationProperty Name="WebUsers" Relationship="Self.FK__WebUser__RoleId__2F10007B" FromRole="UserRole" ToRole="WebUser" />
+        </EntityType>
+        <EntityType Name="WebUser">
+          <Key>
+            <PropertyRef Name="WebUserId" />
+          </Key>
+          <Property Name="WebUserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WebUserName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="WebEmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="RoleId" Type="Int32" />
+          <Property Name="LocationId" Type="Int32" />
+          <Property Name="LastLogin" Type="DateTime" Precision="3" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Company" Relationship="Self.FK__WebUser__Company__2E1BDC42" FromRole="WebUser" ToRole="Company" />
+          <NavigationProperty Name="Location" Relationship="Self.FK__WebUser__Locatio__300424B4" FromRole="WebUser" ToRole="Location" />
+          <NavigationProperty Name="UserRole" Relationship="Self.FK__WebUser__RoleId__2F10007B" FromRole="WebUser" ToRole="UserRole" />
+        </EntityType>
+        <EntityType Name="Well">
+          <Key>
+            <PropertyRef Name="WellId" />
+          </Key>
+          <Property Name="WellName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LocationId" Type="Int32" />
+          <Property Name="WellTypeId" Type="Int32" />
+          <Property Name="Flow" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="WellId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Location" Relationship="Self.FK__Well__LocationId__34C8D9D1" FromRole="Well" ToRole="Location" />
+          <NavigationProperty Name="WellType" Relationship="Self.FK__Well__WellTypeId__35BCFE0A" FromRole="Well" ToRole="WellType" />
+        </EntityType>
+        <EntityType Name="WellType">
+          <Key>
+            <PropertyRef Name="WellTypeId" />
+          </Key>
+          <Property Name="WellTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WellTypeName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Wells" Relationship="Self.FK__Well__WellTypeId__35BCFE0A" FromRole="WellType" ToRole="Well" />
+        </EntityType>
+        <Association Name="FK__WebUser__Company__2E1BDC42">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="WebUser" Type="Self.WebUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="WebUser">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WebUser__Locatio__300424B4">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="WebUser" Type="Self.WebUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="WebUser">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Well__LocationId__34C8D9D1">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Well" Type="Self.Well" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Well">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RolePermi__Permi__4E88ABD4">
+          <End Role="Permission" Type="Self.Permission" Multiplicity="0..1" />
+          <End Role="RolePermission" Type="Self.RolePermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permission">
+              <PropertyRef Name="PermissionId" />
+            </Principal>
+            <Dependent Role="RolePermission">
+              <PropertyRef Name="PermissionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RolePermi__RoleI__4D94879B">
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="0..1" />
+          <End Role="RolePermission" Type="Self.RolePermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="UserRoleId" />
+            </Principal>
+            <Dependent Role="RolePermission">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RolePermi__Syste__4F7CD00D">
+          <End Role="SystemInformation" Type="Self.SystemInformation" Multiplicity="0..1" />
+          <End Role="RolePermission" Type="Self.RolePermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemInformation">
+              <PropertyRef Name="SystemInformationId" />
+            </Principal>
+            <Dependent Role="RolePermission">
+              <PropertyRef Name="SystemInformationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WebUser__RoleId__2F10007B">
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="0..1" />
+          <End Role="WebUser" Type="Self.WebUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="UserRoleId" />
+            </Principal>
+            <Dependent Role="WebUser">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Well__WellTypeId__35BCFE0A">
+          <End Role="WellType" Type="Self.WellType" Multiplicity="0..1" />
+          <End Role="Well" Type="Self.Well" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WellType">
+              <PropertyRef Name="WellTypeId" />
+            </Principal>
+            <Dependent Role="Well">
+              <PropertyRef Name="WellTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OilDataCollectionEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="FulcurmEmployees" EntityType="Self.FulcurmEmployee" />
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="Permissions" EntityType="Self.Permission" />
+          <EntitySet Name="RolePermissions" EntityType="Self.RolePermission" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="SystemInformations" EntityType="Self.SystemInformation" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+          <EntitySet Name="WebUsers" EntityType="Self.WebUser" />
+          <EntitySet Name="Wells" EntityType="Self.Well" />
+          <EntitySet Name="WellTypes" EntityType="Self.WellType" />
+          <AssociationSet Name="FK__WebUser__Company__2E1BDC42" Association="Self.FK__WebUser__Company__2E1BDC42">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="WebUser" EntitySet="WebUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WebUser__Locatio__300424B4" Association="Self.FK__WebUser__Locatio__300424B4">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="WebUser" EntitySet="WebUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Well__LocationId__34C8D9D1" Association="Self.FK__Well__LocationId__34C8D9D1">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Well" EntitySet="Wells" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RolePermi__Permi__4E88ABD4" Association="Self.FK__RolePermi__Permi__4E88ABD4">
+            <End Role="Permission" EntitySet="Permissions" />
+            <End Role="RolePermission" EntitySet="RolePermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RolePermi__RoleI__4D94879B" Association="Self.FK__RolePermi__RoleI__4D94879B">
+            <End Role="UserRole" EntitySet="UserRoles" />
+            <End Role="RolePermission" EntitySet="RolePermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RolePermi__Syste__4F7CD00D" Association="Self.FK__RolePermi__Syste__4F7CD00D">
+            <End Role="SystemInformation" EntitySet="SystemInformations" />
+            <End Role="RolePermission" EntitySet="RolePermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WebUser__RoleId__2F10007B" Association="Self.FK__WebUser__RoleId__2F10007B">
+            <End Role="UserRole" EntitySet="UserRoles" />
+            <End Role="WebUser" EntitySet="WebUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Well__WellTypeId__35BCFE0A" Association="Self.FK__Well__WellTypeId__35BCFE0A">
+            <End Role="WellType" EntitySet="WellTypes" />
+            <End Role="Well" EntitySet="Wells" />
+          </AssociationSet>
+          <FunctionImport Name="SpSelect_WellData" ReturnType="Collection(OilDataCollectionModel.SpSelect_WellData_Result)" />
+          <FunctionImport Name="SpSelect_dashboardWellmarkers" ReturnType="Collection(OilDataCollectionModel.SpSelect_dashboardWellmarkers_Result)" />
+        </EntityContainer>
+        <ComplexType Name="SpSelect_WellData_Result">
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Location" Nullable="true" />
+          <Property Type="String" Name="Flow" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="date" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="SpSelect_dashboardWellmarkers_Result">
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Location" Nullable="true" />
+          <Property Type="String" Name="Latitute" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Longtitute" Nullable="true" MaxLength="200" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OilDataCollectionModelStoreContainer" CdmEntityContainer="OilDataCollectionEntities">
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="OilDataCollectionModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FulcurmEmployees">
+            <EntityTypeMapping TypeName="OilDataCollectionModel.FulcurmEmployee">
+              <MappingFragment StoreEntitySet="FulcurmEmployee">
+                <ScalarProperty Name="FulcurmEmployeeId" ColumnName="FulcurmEmployeeId" />
+                <ScalarProperty Name="FulcurmEmployeeName" ColumnName="FulcurmEmployeeName" />
+                <ScalarProperty Name="FulcurmEmployeeEmail" ColumnName="FulcurmEmployeeEmail" />
+                <ScalarProperty Name="FulcurmEmployeeLastReport" ColumnName="FulcurmEmployeeLastReport" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="OilDataCollectionModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permissions">
+            <EntityTypeMapping TypeName="OilDataCollectionModel.Permission">
+              <MappingFragment StoreEntitySet="Permission">
+                <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
+                <ScalarProperty Name="PermissionName" ColumnName="PermissionName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RolePermissions">
+            <EntityTypeMapping TypeName="OilDataCollectionModel.RolePermission">
+              <MappingFragment StoreEntitySet="RolePermission">
+                <ScalarProperty Name="RolePermissionId" ColumnName="RolePermissionId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
+                <ScalarProperty Name="SystemInformationId" ColumnName="SystemInformationId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="OilDataCollectionModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemInformations">
+            <EntityTypeMapping TypeName="OilDataCollectionModel.SystemInformation">
+              <MappingFragment StoreEntitySet="SystemInformation">
+                <ScalarProperty Name="SystemInformationId" ColumnName="SystemInformationId" />
+                <ScalarProperty Name="SyatemInformationName" ColumnName="SyatemInformationName" />
+                <ScalarProperty Name="SystemInformationValue" ColumnName="SystemInformationValue" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="OilDataCollectionModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebUsers">
+            <EntityTypeMapping TypeName="OilDataCollectionModel.WebUser">
+              <MappingFragment StoreEntitySet="WebUser">
+                <ScalarProperty Name="WebUserId" ColumnName="WebUserId" />
+                <ScalarProperty Name="WebUserName" ColumnName="WebUserName" />
+                <ScalarProperty Name="WebEmailId" ColumnName="WebEmailId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wells">
+            <EntityTypeMapping TypeName="OilDataCollectionModel.Well">
+              <MappingFragment StoreEntitySet="Well">
+                <ScalarProperty Name="WellName" ColumnName="WellName" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="WellTypeId" ColumnName="WellTypeId" />
+                <ScalarProperty Name="Flow" ColumnName="Flow" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="WellId" ColumnName="WellId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WellTypes">
+            <EntityTypeMapping TypeName="OilDataCollectionModel.WellType">
+              <MappingFragment StoreEntitySet="WellType">
+                <ScalarProperty Name="WellTypeId" ColumnName="WellTypeId" />
+                <ScalarProperty Name="WellTypeName" ColumnName="WellTypeName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SpSelect_WellData" FunctionName="OilDataCollectionModel.Store.SpSelect_WellData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OilDataCollectionModel.SpSelect_WellData_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Flow" ColumnName="Flow" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SpSelect_dashboardWellmarkers" FunctionName="OilDataCollectionModel.Store.SpSelect_dashboardWellmarkers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OilDataCollectionModel.SpSelect_dashboardWellmarkers_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Latitute" ColumnName="Latitute" />
+                <ScalarProperty Name="Longtitute" ColumnName="Longtitute" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
